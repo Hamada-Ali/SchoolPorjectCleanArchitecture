@@ -9,5 +9,7 @@
         public const string updated = "updated";
         public const string success = "success";
         public const string NotEmpty = "NotEmpty";
+        public const string IsExist = "IsExist";
+        public const string DepartmentIdNotExist = "DepartmentIdNotExist";
     }
 }

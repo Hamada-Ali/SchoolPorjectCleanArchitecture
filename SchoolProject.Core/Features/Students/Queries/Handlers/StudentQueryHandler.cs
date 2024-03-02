@@ -6,9 +6,7 @@ using SchoolProject.Core.Features.Students.Queries.Dto;
 using SchoolProject.Core.Features.Students.Queries.Models;
 using SchoolProject.Core.Resources;
 using SchoolProject.Core.Wrappers;
-using SchoolProject.Domain.Entities;
 using SchoolProject.Services.Interface;
-using System.Linq.Expressions;
 
 namespace SchoolProject.Core.Features.Students.Queries.Handlers
 {
@@ -58,13 +56,16 @@ namespace SchoolProject.Core.Features.Students.Queries.Handlers
 
         public async Task<PaginatedResult<StudentPaginatedList>> Handle(GetStudentPaginatedListQuery request, CancellationToken cancellationToken)
         {
-            Expression<Func<Student, StudentPaginatedList>> expression = e => new StudentPaginatedList(e.StudId, e.Localize(e.NameAr, e.NameEn), e.Address, e.Department.Localize(e.Department.DNameAr, e.Department.DNameEn));
+            //Expression<Func<Student, StudentPaginatedList>> expression = e => new StudentPaginatedList(e.StudId, e.Localize(e.NameAr, e.NameEn), e.Address, e.Department.Localize(e.Department.DNameAr, e.Department.DNameEn));
 
             // var querable = _service.GetStudentsQueryable();
 
             var FilteredQuery = _service.FilterStudentPaginatedQueryable(request.OrderBy, request.Search);
 
-            var paginatedList = await FilteredQuery.Select(expression).ToPaginatedListAsync(request.PageNumber, request.PageSize);
+            var paginatedList = await _mapper.ProjectTo<StudentPaginatedList>(FilteredQuery).ToPaginatedListAsync(request.PageNumber, request.PageSize);
+
+            // we can paginated it with 3 way with expression and dependncy injection ( x => StudentPaginatedList(...))
+            // and we mapping used above
 
             paginatedList.Meta = new { Count = paginatedList.Data.Count };
 

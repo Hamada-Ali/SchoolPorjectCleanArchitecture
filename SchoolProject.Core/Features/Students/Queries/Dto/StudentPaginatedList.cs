@@ -2,13 +2,13 @@
 {
     public class StudentPaginatedList
     {
-        public StudentPaginatedList(int studId, string? name, string? address, string? departmentName)
-        {
-            StudId = studId;
-            Name = name;
-            Address = address;
-            DepartmentName = departmentName;
-        }
+        //public StudentPaginatedList(int studId, string? name, string? address, string? departmentName)
+        //{
+        //    StudId = studId;
+        //    Name = name;
+        //    Address = address;
+        //    DepartmentName = departmentName;
+        //} // using contructor for dependency injection way
 
         public int StudId { get; set; }
 

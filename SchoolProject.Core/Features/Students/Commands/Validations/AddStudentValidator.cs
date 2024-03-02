@@ -10,34 +10,47 @@ namespace SchoolProject.Core.Features.Students.Commands.Validations
     {
         private readonly IStudentService _service;
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+        private readonly IDepartmentService _departmentService;
 
-        public AddStudentValidator(IStudentService service, IStringLocalizer<SharedResources> stringLocalizer)
+        public AddStudentValidator(IStudentService service, IStringLocalizer<SharedResources> stringLocalizer,
+                                                                IDepartmentService departmentService)
         {
-            ApplyValidationRules();
-            ApplyCustomeValidationRules();
             _service = service;
             _stringLocalizer = stringLocalizer;
+            ApplyValidationRules();
+            ApplyCustomeValidationRules();
+            _departmentService = departmentService;
         }
 
         public void ApplyValidationRules()
         {
             RuleFor(x => x.NameEn)
-                .NotEmpty().WithMessage("can't be empty")
-                .NotNull().WithMessage("field can't be null")
+                .NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
+                .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.Required])
                 .MaximumLength(10).WithMessage("MAX LENGTH IS 10");
 
             RuleFor(x => x.Address)
-                .NotEmpty().WithMessage("{PropertyName} must not be empty")
-                .NotNull().WithMessage("{PropertyValue} can't be null")
+                .NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
+                .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.Required])
                 .MaximumLength(10).WithMessage("{PropertyName} LENGTH IS 10");
+
+            RuleFor(x => x.DepartmentId)
+                .NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
+                .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.Required]);
 
         }
 
         public void ApplyCustomeValidationRules()
         {
+            RuleFor(x => x.NameAr)
+                .MustAsync(async (Key, CancellationToken) => !await _service.IsNameExist(Key))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsExist]);
             RuleFor(x => x.NameEn)
                 .MustAsync(async (Key, CancellationToken) => !await _service.IsNameExist(Key))
-                .WithMessage("Name is Exist");
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsExist]);
+            RuleFor(x => x.DepartmentId)
+                .MustAsync(async (Key, CancellationToken) => await _departmentService.IsDepartmentExist(Key))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.DepartmentIdNotExist]);
         }
     }
 }
