@@ -1,0 +1,24 @@
+
+
+// clean architechture flow
+
+Domain => Infrastructure => services => core => API
+
+
+
+// References
+
+API => CORE
+
+----------
+
+CORE => DOMAIN - INFRASTRUCTURE - SERVICES
+
+--------
+
+INFRASTRUCTURE => DOMAIN
+
+
+--------
+
+SERVICES => DOMAIN - INFRASTRUCTURE
