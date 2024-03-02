@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SchoolProject.Domain.Entities;
+using SchoolProject.Domain.Entities.Identity;
 
 namespace SchoolProject.Infrustructure.Domain
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+    // we converting all ids in User Table to int instead of GUID ex. RoleId, userId
     {
         public ApplicationDbContext()
         {
@@ -15,6 +19,7 @@ namespace SchoolProject.Infrustructure.Domain
 
         }
 
+        public DbSet<User> User { get; set; }
         public DbSet<Department> departments { get; set; }
         public DbSet<Student> students { get; set; }
         public DbSet<DepartmentSubject> departmentSubjects { get; set; }
