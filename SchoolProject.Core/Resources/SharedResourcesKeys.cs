@@ -11,5 +11,9 @@
         public const string NotEmpty = "NotEmpty";
         public const string IsExist = "IsExist";
         public const string DepartmentIdNotExist = "DepartmentIdNotExist";
+        public const string PasswordNotEqualConfirmPassword = "PasswordNotEqualConfirmPassword";
+        public const string EmailIsExist = "EmailIsExist";
+        public const string UserNameIsExist = "UserNameIsExist";
+        public const string FailedCreateOperation = "FailedCreateOperation";
     }
 }

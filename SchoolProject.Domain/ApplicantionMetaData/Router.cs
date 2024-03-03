@@ -26,5 +26,11 @@
             public const string GetById = Prefix + "/Id";
 
         }
+
+        public static class IdentityUser
+        {
+            public const string Prefix = Rule + "User";
+            public const string Create = Prefix + "/Create";
+        }
     }
 }
