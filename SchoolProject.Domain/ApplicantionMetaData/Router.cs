@@ -31,6 +31,9 @@
         {
             public const string Prefix = Rule + "User";
             public const string Create = Prefix + "/Create";
+            public const string Paginated = Prefix + "/PaginatedList";
+            public const string GetById = Prefix + Id;
         }
+
     }
 }

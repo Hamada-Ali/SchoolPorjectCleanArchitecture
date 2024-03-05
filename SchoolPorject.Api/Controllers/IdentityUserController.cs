@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolPorject.Api.Base;
 using SchoolProject.Core.Features.IdentityUser.Commands.Models;
+using SchoolProject.Core.Features.IdentityUser.Queries.Models;
 using SchoolProject.Domain.ApplicantionMetaData;
 
 namespace SchoolPorject.Api.Controllers
@@ -14,5 +15,22 @@ namespace SchoolPorject.Api.Controllers
             var response = await Mediator.Send(command); // alternative to { Id = id }
             return NewResult(response);
         }
+
+        [HttpPost(Router.IdentityUser.Paginated)]
+        public async Task<IActionResult> GetPaginatedList([FromQuery] GetUserPaginatedListQuery query)
+        {
+            var response = await Mediator.Send(query); // alternative to { Id = id }
+            return Ok(response); // we use Ok here because GetUserPaginatedListQuery don't return responseinformation
+        }
+
+        [HttpGet(Router.IdentityUser.GetById)]
+        public async Task<IActionResult> GetUserById([FromRoute] int id)
+        {
+            var response = await Mediator.Send(new GetUserByIdQuery(id));
+            return NewResult(response);
+        }
+
+
+
     }
 }
