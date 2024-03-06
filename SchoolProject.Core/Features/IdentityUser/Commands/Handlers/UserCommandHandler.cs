@@ -10,7 +10,8 @@ using SchoolProject.Domain.Entities.Identity;
 namespace SchoolProject.Core.Features.IdentityUser.Commands.Handlers
 {
     public class UserCommandHandler : ResponseHandler,
-                                        IRequestHandler<AddUserCommand, ResponseInformation<string>>
+                                        IRequestHandler<AddUserCommand, ResponseInformation<string>>,
+                                        IRequestHandler<UpdateUserCommand, ResponseInformation<string>>
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         private readonly IMapper _mapper;
@@ -58,6 +59,27 @@ namespace SchoolProject.Core.Features.IdentityUser.Commands.Handlers
 
             // success
             return Created("");
+        }
+
+        public async Task<ResponseInformation<string>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _user.FindByIdAsync(request.Id.ToString());
+
+            // check if the user is exist by email
+            if (user == null)
+            {
+                return NotFound<string>(_stringLocalizer[SharedResourcesKeys.NotFound]);
+            }
+
+            var mappedUser = _mapper.Map(request, user);
+
+            var result = await _user.UpdateAsync(mappedUser);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedCreateOperation]);
+            }
+            return Success<string>(_stringLocalizer[SharedResourcesKeys.updated]);
         }
     }
 }

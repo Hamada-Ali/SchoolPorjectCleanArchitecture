@@ -148,7 +148,7 @@
     <value>This Field Is Required</value>
   </data>
   <data name="success" xml:space="preserve">
-    <value>Added Successfully</value>
+    <value>Operation Succeed</value>
   </data>
   <data name="updated" xml:space="preserve">
     <value>Updated Successfully</value>

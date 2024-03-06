@@ -30,7 +30,12 @@ namespace SchoolPorject.Api.Controllers
             return NewResult(response);
         }
 
-
+        [HttpPut(Router.IdentityUser.Update)]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
+        }
 
     }
 }
