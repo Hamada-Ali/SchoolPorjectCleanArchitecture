@@ -141,6 +141,9 @@
   <data name="NotFound" xml:space="preserve">
     <value>Thie Object not found</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>Operation Failed</value>
+  </data>
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>Passwords Not Matching</value>
   </data>

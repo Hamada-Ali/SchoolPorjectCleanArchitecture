@@ -34,6 +34,7 @@
             public const string Paginated = Prefix + "/PaginatedList";
             public const string GetById = Prefix + Id;
             public const string Update = Prefix + "/Update";
+            public const string UpdatePassowrd = Prefix + "/UpdatePassowrd";
         }
 
     }

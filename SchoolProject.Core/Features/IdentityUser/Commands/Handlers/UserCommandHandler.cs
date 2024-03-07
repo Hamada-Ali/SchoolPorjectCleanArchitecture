@@ -11,7 +11,9 @@ namespace SchoolProject.Core.Features.IdentityUser.Commands.Handlers
 {
     public class UserCommandHandler : ResponseHandler,
                                         IRequestHandler<AddUserCommand, ResponseInformation<string>>,
-                                        IRequestHandler<UpdateUserCommand, ResponseInformation<string>>
+                                        IRequestHandler<UpdateUserCommand, ResponseInformation<string>>,
+                                        IRequestHandler<DeleteUserCommand, ResponseInformation<string>>,
+                                        IRequestHandler<ChangeUserPasswordCommand, ResponseInformation<string>>
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         private readonly IMapper _mapper;
@@ -80,6 +82,45 @@ namespace SchoolProject.Core.Features.IdentityUser.Commands.Handlers
                 return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedCreateOperation]);
             }
             return Success<string>(_stringLocalizer[SharedResourcesKeys.updated]);
+        }
+
+        public async Task<ResponseInformation<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _user.FindByIdAsync(request.Id.ToString());
+
+            if (user == null)
+            {
+                return NotFound<string>(_stringLocalizer[SharedResourcesKeys.NotFound]);
+            }
+
+            var result = _user.DeleteAsync(user);
+
+            if (!result.Result.Succeeded)
+            {
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.OperationFailed]);
+            }
+
+            return Success<string>(_stringLocalizer[SharedResourcesKeys.success]);
+        }
+
+        public async Task<ResponseInformation<string>> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)
+        {
+            // get user by id
+            var user = await _user.FindByIdAsync(request.Id.ToString());
+
+            if (user == null)
+            {
+                return NotFound<string>(_stringLocalizer[SharedResourcesKeys.NotFound]);
+            }
+
+            var result = await _user.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.OperationFailed]);
+            }
+
+            return Success<string>(_stringLocalizer[SharedResourcesKeys.success]);
         }
     }
 }

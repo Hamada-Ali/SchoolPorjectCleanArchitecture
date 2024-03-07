@@ -141,6 +141,9 @@
   <data name="NotFound" xml:space="preserve">
     <value>غير موجود</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>العملية فشلت</value>
+  </data>
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>كلمة المرور غير متطابقة</value>
   </data>
