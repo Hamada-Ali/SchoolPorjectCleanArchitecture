@@ -37,5 +37,11 @@
             public const string UpdatePassowrd = Prefix + "/UpdatePassowrd";
         }
 
+        public static class Authentication
+        {
+            public const string Prefix = Rule + "Auth";
+            public const string SignIn = Prefix + "/signin";
+        }
+
     }
 }

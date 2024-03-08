@@ -16,5 +16,9 @@
         public const string UserNameIsExist = "UserNameIsExist";
         public const string FailedCreateOperation = "FailedCreateOperation";
         public const string OperationFailed = "OperationFailed";
+        public const string UserName = "UserName";
+        public const string Password = "Password";
+        public const string UserNotExist = "UserNotExist";
+        public const string PasswordNotCorrect = "PasswordNotCorrect";
     }
 }

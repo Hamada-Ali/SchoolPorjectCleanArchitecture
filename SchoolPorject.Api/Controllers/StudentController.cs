@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolPorject.Api.Base;
 using SchoolProject.Core.Features.Students.Commands.Models;
 using SchoolProject.Core.Features.Students.Queries.Models;
@@ -8,6 +9,7 @@ namespace SchoolPorject.Api.Controllers
 {
     //[Route("api/[controller]")] We don't need this we have our custome controller
     //[ApiController]
+    [Authorize]
     public class StudentController : AppControllerBase
     {
 

@@ -16,7 +16,7 @@ namespace SchoolPorject.Api.Controllers
             return NewResult(response);
         }
 
-        [HttpPost(Router.IdentityUser.Paginated)]
+        [HttpGet(Router.IdentityUser.Paginated)]
         public async Task<IActionResult> GetPaginatedList([FromQuery] GetUserPaginatedListQuery query)
         {
             var response = await Mediator.Send(query); // alternative to { Id = id }
