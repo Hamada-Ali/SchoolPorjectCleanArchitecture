@@ -28,7 +28,6 @@ namespace SchoolPorject.Api
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("dbcontext"));
             });
-            //builder.Services.AddIdentity
 
             #region Localization
 
@@ -63,7 +62,7 @@ namespace SchoolPorject.Api
             builder.Services.AddInfrastructureDependencies()
                         .AddServiceDependencies()
                         .AddCoreDependency()
-                        .AddServiceRegistration();
+                        .AddServiceRegistration(builder.Configuration);
             #endregion
 
 
@@ -102,6 +101,8 @@ namespace SchoolPorject.Api
             app.UseHttpsRedirection();
 
             app.UseCors(cors); // using our variable
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

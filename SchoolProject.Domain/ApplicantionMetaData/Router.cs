@@ -26,5 +26,31 @@
             public const string GetById = Prefix + "/Id";
 
         }
+
+        public static class IdentityUser
+        {
+            public const string Prefix = Rule + "User";
+            public const string Create = Prefix + "/Create";
+            public const string Paginated = Prefix + "/PaginatedList";
+            public const string GetById = Prefix + Id;
+            public const string Update = Prefix + "/Update";
+            public const string UpdatePassowrd = Prefix + "/UpdatePassowrd";
+        }
+
+        public static class Authentication
+        {
+            public const string Prefix = Rule + "Authentication";
+            public const string SignIn = Prefix + "/signin";
+            public const string RefreshToken = Prefix + "/RefreshToken";
+            public const string ValidateToken = Prefix + "/ValidateToken";
+        }
+
+        public static class Authorization
+        {
+            public const string Prefix = Rule + "Authorization";
+            public const string Create = Prefix + "/Create";
+
+        }
+
     }
 }
