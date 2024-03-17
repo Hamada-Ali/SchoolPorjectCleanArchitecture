@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.IdentityUser.Commands.Models;
@@ -57,6 +58,17 @@ namespace SchoolProject.Core.Features.IdentityUser.Commands.Handlers
             if (!createUser.Succeeded)
             {
                 return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedCreateOperation] + $" => Description: {createUser.Errors.FirstOrDefault().Description}");
+            }
+
+            var users = await _user.Users.ToListAsync();
+
+            if (users.Count >= 0)
+            {
+                await _user.AddToRoleAsync(mappedUser, "User");
+            }
+            else
+            {
+                await _user.AddToRoleAsync(mappedUser, "Admin");
             }
 
             // success
