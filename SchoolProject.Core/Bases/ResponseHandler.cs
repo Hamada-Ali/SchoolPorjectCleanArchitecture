@@ -52,6 +52,16 @@ namespace SchoolProject.Core.Bases
             };
         }
 
+        public ResponseInformation<T> Unauthorized<T>(string msg)
+        {
+            return new ResponseInformation<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.Unauthorized,
+                Succeeded = true,
+                Message = msg
+            };
+        }
+
         public ResponseInformation<T> UnprocessableEntity<T>(string Message = null)
         {
             return new ResponseInformation<T>()

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlgorithmIsWrong" xml:space="preserve">
+    <value>The Algorithm Used Not matched</value>
+  </data>
   <data name="created" xml:space="preserve">
     <value>Created Successfully</value>
   </data>
@@ -153,11 +156,23 @@
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>Passwords Not Matching</value>
   </data>
+  <data name="RefreshTokenIsExpired" xml:space="preserve">
+    <value>Token Is Expired</value>
+  </data>
+  <data name="RefreshTokenIsNotFound" xml:space="preserve">
+    <value>The Refresh Token is Not Found</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>This Field Is Required</value>
   </data>
   <data name="success" xml:space="preserve">
     <value>Operation Succeed</value>
+  </data>
+  <data name="TokenIsExpired" xml:space="preserve">
+    <value>Token Is Expired</value>
+  </data>
+  <data name="TokenIsNotExpired" xml:space="preserve">
+    <value>Token is Valid , Not Expired Yet</value>
   </data>
   <data name="updated" xml:space="preserve">
     <value>Updated Successfully</value>

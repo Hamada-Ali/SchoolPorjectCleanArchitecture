@@ -25,6 +25,7 @@ namespace SchoolProject.Infrustructure.Domain
         public DbSet<DepartmentSubject> departmentSubjects { get; set; }
         public DbSet<Subjects> subjects { get; set; }
         public DbSet<StudentSubject> studentSubjects { get; set; }
+        public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
 
         // using fluent api
         protected override void OnModelCreating(ModelBuilder modelBuilder)

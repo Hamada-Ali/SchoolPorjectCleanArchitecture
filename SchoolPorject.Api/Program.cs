@@ -28,7 +28,6 @@ namespace SchoolPorject.Api
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("dbcontext"));
             });
-            //builder.Services.AddIdentity
 
             #region Localization
 
