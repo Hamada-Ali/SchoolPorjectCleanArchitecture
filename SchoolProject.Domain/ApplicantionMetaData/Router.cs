@@ -39,10 +39,17 @@
 
         public static class Authentication
         {
-            public const string Prefix = Rule + "Auth";
+            public const string Prefix = Rule + "Authentication";
             public const string SignIn = Prefix + "/signin";
             public const string RefreshToken = Prefix + "/RefreshToken";
             public const string ValidateToken = Prefix + "/ValidateToken";
+        }
+
+        public static class Authorization
+        {
+            public const string Prefix = Rule + "Authorization";
+            public const string Create = Prefix + "/Create";
+
         }
 
     }

@@ -6,7 +6,7 @@ using SchoolProject.Domain.Entities.Identity;
 
 namespace SchoolProject.Infrustructure.Domain
 {
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+    public class ApplicationDbContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     // we converting all ids in User Table to int instead of GUID ex. RoleId, userId
     {
         public ApplicationDbContext()

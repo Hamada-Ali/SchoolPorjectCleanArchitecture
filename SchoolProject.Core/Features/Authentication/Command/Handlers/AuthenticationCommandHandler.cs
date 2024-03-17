@@ -47,9 +47,10 @@ namespace SchoolProject.Core.Features.Authentication.Command.Handlers
                 return BadRequest<JwtAuthDto>(_stringLocalizer[SharedResourcesKeys.PasswordNotCorrect]);
             }
 
-            if (!signIn.Result.Succeeded)
+            if (!signIn.IsCompleted)
             {
-                return BadRequest<JwtAuthDto>($"{signIn.Exception.Message}");
+
+                return BadRequest<JwtAuthDto>($"{""}");
             }
             // generate token
             var token = await _authenticationService.GetJwtToken(user);

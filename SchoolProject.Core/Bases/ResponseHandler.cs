@@ -6,10 +6,16 @@ namespace SchoolProject.Core.Bases
     public class ResponseHandler
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+        private IStringLocalizer _stringLocalizer1;
 
         public ResponseHandler(IStringLocalizer<SharedResources> stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
+        }
+
+        public ResponseHandler(IStringLocalizer stringLocalizer1)
+        {
+            _stringLocalizer1 = stringLocalizer1;
         }
 
         public ResponseInformation<T> Deleted<T>()
