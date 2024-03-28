@@ -21,12 +21,12 @@ namespace SchoolProject.Infrustructure
             services.AddIdentity<User, Role>(option =>
             {
                 // Password settings.
-                option.Password.RequireDigit = true;
-                option.Password.RequireLowercase = true;
-                option.Password.RequireNonAlphanumeric = true;
-                option.Password.RequireUppercase = true;
-                option.Password.RequiredLength = 6;
-                option.Password.RequiredUniqueChars = 1;
+                option.Password.RequireDigit = false;
+                option.Password.RequireLowercase = false;
+                option.Password.RequireNonAlphanumeric = false;
+                option.Password.RequireUppercase = false;
+                option.Password.RequiredLength = 3;
+                option.Password.RequiredUniqueChars = 0;
 
                 // Lockout settings.
                 option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
