@@ -135,6 +135,24 @@
   <data name="FailedCreateOperation" xml:space="preserve">
     <value>Create Operation Failed</value>
   </data>
+  <data name="FailedToAddNewClaims" xml:space="preserve">
+    <value>Failed to Add New Claims</value>
+  </data>
+  <data name="FailedToAddNewRoles" xml:space="preserve">
+    <value>Failed to Add new Roles</value>
+  </data>
+  <data name="FailedToRemoveOldClaims" xml:space="preserve">
+    <value>Failed to Remove Old Claims</value>
+  </data>
+  <data name="FailedToRemoveOldRoles" xml:space="preserve">
+    <value>Failed to Remove Old Roles</value>
+  </data>
+  <data name="FailedToUpdateClaims" xml:space="preserve">
+    <value>Failed to Update the Claims</value>
+  </data>
+  <data name="FailedToUpdateUserRoles" xml:space="preserve">
+    <value>Failed to Update User Roles</value>
+  </data>
   <data name="IsExist" xml:space="preserve">
     <value>This Record Is Exist</value>
   </data>
@@ -164,6 +182,12 @@
   </data>
   <data name="Required" xml:space="preserve">
     <value>This Field Is Required</value>
+  </data>
+  <data name="RoleIsUsed" xml:space="preserve">
+    <value>Role Currently in Use</value>
+  </data>
+  <data name="RoleNotExist" xml:space="preserve">
+    <value>Role Is Not Exist</value>
   </data>
   <data name="success" xml:space="preserve">
     <value>Operation Succeed</value>

@@ -73,6 +73,7 @@ namespace SchoolProject.Services.Implementation
         #region GenerateJwtTokenMethod
         private async Task<(JwtSecurityToken, string)> GenerateJwtToken(User user)
         {
+
             // issuer : who this token belong to 
             // audience : 
             // claims  = Payload ( the data used to geenrate payload) 
@@ -80,14 +81,22 @@ namespace SchoolProject.Services.Implementation
             // expire : expiration date of the token
             // signInCredentials : the alogrithm that used in token and secret key 
             // Note : Jwt Data Should be in Appsetting file
+
+            var roles = await _userManager.GetRolesAsync(user);
             var claims = new List<Claim>()
             {
-                new Claim("UserName", user.UserName),
-                new Claim("PhoneNumber", user.PhoneNumber),
-                new Claim("Email", user.Email),
-                new Claim("Id", user.Id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.MobilePhone, user.PhoneNumber),
+                new Claim(ClaimTypes.Email, user.Email),
 
             };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
             var token = new JwtSecurityToken(
                         _jwtConfig.Issuer, //"SchoolProject",
                         _jwtConfig.Audience, //"",

@@ -48,7 +48,16 @@
         public static class Authorization
         {
             public const string Prefix = Rule + "Authorization";
-            public const string Create = Prefix + "/Create";
+            public const string Role = Prefix + "/Role";
+            public const string CreateRole = Role + "/CreateRole";
+            public const string EditRole = Role + "/EditRole";
+            public const string GetRolesList = Role + "/GetRolesList";
+            public const string GetRoleById = Role + "/GetRoleById" + Id;
+            public const string DeleteRole = Role + "/DeleteRole" + Id;
+            public const string ManageUserRoles = Role + "/ManageUserRoles/{userId}";
+            public const string ManageUserClaims = Role + "/ManageUserClaims/{userId}";
+            public const string UpdateUserRoles = Role + "/UpdateUserRoles";
+            public const string UpdateUserClaims = Role + "/UpdateUserClaims";
 
         }
 
