@@ -14,6 +14,7 @@ namespace SchoolProject.Infrustructure
             services.AddTransient<IDepartmentRespository, DepartmentRespository>();
             services.AddTransient<IInstrctorRespository, InstructorRepository>();
             services.AddTransient<ISubjectRepository, SubjectRepository>();
+            services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             return services;
         }

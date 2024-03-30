@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolProject.Core;
 using SchoolProject.Core.Middleware;
+using SchoolProject.Domain.Entities.Identity;
 using SchoolProject.Infrustructure;
 using SchoolProject.Infrustructure.Domain;
+using SchoolProject.Infrustructure.Seeding;
 using SchoolProject.Services;
 using System.Globalization;
 
@@ -12,7 +15,7 @@ namespace SchoolPorject.Api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +31,6 @@ namespace SchoolPorject.Api
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("dbcontext"));
             });
-            //builder.Services.AddIdentity
 
             #region Localization
 
@@ -63,7 +65,7 @@ namespace SchoolPorject.Api
             builder.Services.AddInfrastructureDependencies()
                         .AddServiceDependencies()
                         .AddCoreDependency()
-                        .AddServiceRegistration();
+                        .AddServiceRegistration(builder.Configuration);
             #endregion
 
 
@@ -86,6 +88,16 @@ namespace SchoolPorject.Api
 
             var app = builder.Build();
 
+            #region Seeding
+            using (var scope = app.Services.CreateScope())
+            {
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
+                await RoleSeeding.SeedAsync(roleManager); // put default values 
+                await UserSeeding.SeedAsync(userManager);
+            }
+            #endregion
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -102,6 +114,8 @@ namespace SchoolPorject.Api
             app.UseHttpsRedirection();
 
             app.UseCors(cors); // using our variable
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

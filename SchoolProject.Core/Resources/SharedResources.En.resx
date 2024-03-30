@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlgorithmIsWrong" xml:space="preserve">
+    <value>The Algorithm Used Not matched</value>
+  </data>
   <data name="created" xml:space="preserve">
     <value>Created Successfully</value>
   </data>
@@ -125,6 +128,30 @@
   </data>
   <data name="DepartmentIdNotExist" xml:space="preserve">
     <value>Department Not Exist</value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>The Email Already Exists</value>
+  </data>
+  <data name="FailedCreateOperation" xml:space="preserve">
+    <value>Create Operation Failed</value>
+  </data>
+  <data name="FailedToAddNewClaims" xml:space="preserve">
+    <value>Failed to Add New Claims</value>
+  </data>
+  <data name="FailedToAddNewRoles" xml:space="preserve">
+    <value>Failed to Add new Roles</value>
+  </data>
+  <data name="FailedToRemoveOldClaims" xml:space="preserve">
+    <value>Failed to Remove Old Claims</value>
+  </data>
+  <data name="FailedToRemoveOldRoles" xml:space="preserve">
+    <value>Failed to Remove Old Roles</value>
+  </data>
+  <data name="FailedToUpdateClaims" xml:space="preserve">
+    <value>Failed to Update the Claims</value>
+  </data>
+  <data name="FailedToUpdateUserRoles" xml:space="preserve">
+    <value>Failed to Update User Roles</value>
   </data>
   <data name="IsExist" xml:space="preserve">
     <value>This Record Is Exist</value>
@@ -135,13 +162,52 @@
   <data name="NotFound" xml:space="preserve">
     <value>Thie Object not found</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>Operation Failed</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordNotCorrect" xml:space="preserve">
+    <value>Username Or Password is Incorrect</value>
+  </data>
+  <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
+    <value>Passwords Not Matching</value>
+  </data>
+  <data name="RefreshTokenIsExpired" xml:space="preserve">
+    <value>Token Is Expired</value>
+  </data>
+  <data name="RefreshTokenIsNotFound" xml:space="preserve">
+    <value>The Refresh Token is Not Found</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>This Field Is Required</value>
   </data>
+  <data name="RoleIsUsed" xml:space="preserve">
+    <value>Role Currently in Use</value>
+  </data>
+  <data name="RoleNotExist" xml:space="preserve">
+    <value>Role Is Not Exist</value>
+  </data>
   <data name="success" xml:space="preserve">
-    <value>Added Successfully</value>
+    <value>Operation Succeed</value>
+  </data>
+  <data name="TokenIsExpired" xml:space="preserve">
+    <value>Token Is Expired</value>
+  </data>
+  <data name="TokenIsNotExpired" xml:space="preserve">
+    <value>Token is Valid , Not Expired Yet</value>
   </data>
   <data name="updated" xml:space="preserve">
     <value>Updated Successfully</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>username</value>
+  </data>
+  <data name="UserNameIsExist" xml:space="preserve">
+    <value>the username is already exists</value>
+  </data>
+  <data name="UserNotExist" xml:space="preserve">
+    <value>Username not found</value>
   </data>
 </root>
