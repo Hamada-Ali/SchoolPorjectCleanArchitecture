@@ -145,7 +145,7 @@ namespace SchoolProject.Services.Implementation
                 userrole.Id = role.Id;
                 userrole.Name = role.Name;
 
-                if (userRoles.Contains(role.Name))
+                if (await _userManager.IsInRoleAsync(user, role.Name))
                 {
                     userrole.HasRole = true;
                 }

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Department\Commands\**" />
+    <EmbeddedResource Remove="Features\Department\Commands\**" />
+    <None Remove="Features\Department\Commands\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SchoolPorject.Infrustructure\SchoolProject.Infrustructure.csproj" />
     <ProjectReference Include="..\SchoolProject.Domain\SchoolProject.Domain.csproj" />
     <ProjectReference Include="..\SchoolProject.Services\SchoolProject.Services.csproj" />
@@ -23,7 +29,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Authentication\Command\Dto\" />
-    <Folder Include="Features\Department\Commands\" />
     <Folder Include="Mapping\Departments\CommandMapping\" />
   </ItemGroup>
 
