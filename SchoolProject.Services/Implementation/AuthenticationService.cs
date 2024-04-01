@@ -83,6 +83,7 @@ namespace SchoolProject.Services.Implementation
             // Note : Jwt Data Should be in Appsetting file
 
             var roles = await _userManager.GetRolesAsync(user);
+            var userClaims = await _userManager.GetClaimsAsync(user);
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -96,6 +97,9 @@ namespace SchoolProject.Services.Implementation
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
+
+
+            claims.AddRange(userClaims);
 
             var token = new JwtSecurityToken(
                         _jwtConfig.Issuer, //"SchoolProject",

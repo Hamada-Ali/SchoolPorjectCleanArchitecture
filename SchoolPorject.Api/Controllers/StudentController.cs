@@ -9,10 +9,9 @@ namespace SchoolPorject.Api.Controllers
 {
     //[Route("api/[controller]")] We don't need this we have our custome controller
     //[ApiController]
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class StudentController : AppControllerBase
     {
-
         [HttpGet(Router.StudentRouting.List)] // custome routing ( ApplicationMetaData folder )
         public async Task<IActionResult> GetStudentList()
         {
@@ -34,6 +33,7 @@ namespace SchoolPorject.Api.Controllers
             return NewResult(response);
         }
 
+        [Authorize(Policy = "CreateStudent")]
         [HttpPost(Router.StudentRouting.Create)]
         public async Task<IActionResult> Create([FromBody] AddStudentCommand command)
         {
@@ -41,6 +41,7 @@ namespace SchoolPorject.Api.Controllers
             return NewResult(response);
         }
 
+        [Authorize(Policy = "EditStudent")]
         [HttpPut(Router.StudentRouting.Edit)]
         public async Task<IActionResult> Edit([FromBody] EditStudentCommand command)
         {
@@ -48,6 +49,8 @@ namespace SchoolPorject.Api.Controllers
             return NewResult(response);
         }
 
+
+        [Authorize(Policy = "DeleteStudent")]
         [HttpDelete(Router.StudentRouting.GetById)]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
