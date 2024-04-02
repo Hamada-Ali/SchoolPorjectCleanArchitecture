@@ -61,5 +61,11 @@
 
         }
 
+        public static class EmailsRoute
+        {
+            public const string Prefix = Rule + "Email";
+            public const string SendEmail = Prefix + "/Send";
+        }
+
     }
 }

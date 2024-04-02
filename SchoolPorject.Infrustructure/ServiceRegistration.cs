@@ -43,12 +43,12 @@ namespace SchoolProject.Infrustructure
 
             //JWT Authentication
             var jwtSettings = new JwtConfig();
-            // var emailSettings = new EmailSettings();
+            var emailSettings = new EmailSettings();
             configuration.GetSection("jwtConfigration").Bind(jwtSettings);
-            // configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
+            configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
 
             services.AddSingleton(jwtSettings);
-            // services.AddSingleton(emailSettings);
+            services.AddSingleton(emailSettings);
 
             services.AddAuthentication(x =>
             {

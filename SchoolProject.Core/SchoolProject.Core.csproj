@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Authentication\Command\Dto\" />
+    <Folder Include="Features\Emails\Queries\" />
     <Folder Include="Mapping\Departments\CommandMapping\" />
   </ItemGroup>
 
