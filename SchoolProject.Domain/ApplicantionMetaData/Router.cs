@@ -43,6 +43,10 @@
             public const string SignIn = Prefix + "/signin";
             public const string RefreshToken = Prefix + "/RefreshToken";
             public const string ValidateToken = Prefix + "/ValidateToken";
+            public const string ConfirmEmail = "/Api/Authentication/ConfirmEmail";
+            public const string SendResetPassword = Prefix + "/SendResetPassword";
+            public const string CheckResetPasswordConfirmation = Prefix + "/CheckResetPasswordConfirmation";
+            public const string ResetPassword = Prefix + "/ResetPassword";
         }
 
         public static class Authorization

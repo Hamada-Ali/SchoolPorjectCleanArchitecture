@@ -14,6 +14,7 @@ namespace SchoolProject.Services
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
             services.AddTransient<IEmailsService, EmailsService>();
+            services.AddTransient<IApplicationUserService, ApplicationUserService>();
             return services;
         }
     }

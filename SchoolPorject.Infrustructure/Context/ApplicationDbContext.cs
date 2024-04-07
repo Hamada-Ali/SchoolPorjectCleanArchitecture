@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using EntityFrameworkCore.EncryptColumn.Extension;
+using EntityFrameworkCore.EncryptColumn.Interfaces;
+using EntityFrameworkCore.EncryptColumn.Util;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Domain.Entities;
@@ -9,6 +12,7 @@ namespace SchoolProject.Infrustructure.Domain
     public class ApplicationDbContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     // we converting all ids in User Table to int instead of GUID ex. RoleId, userId
     {
+        private readonly IEncryptionProvider _encryptionProvider;
         public ApplicationDbContext()
         {
 
@@ -16,7 +20,8 @@ namespace SchoolProject.Infrustructure.Domain
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
+            // this is the key we can decrypt the column with
+            _encryptionProvider = new GenerateEncryptionProvider("68d09eda6a294cf7aeb945e56f5c0b8568d09eda6a294cf7aeb945e56f5c0b85");
         }
 
         public DbSet<User> User { get; set; }
@@ -56,6 +61,8 @@ namespace SchoolProject.Infrustructure.Domain
                 .WithOne(x => x.departmentManager)
                 .HasForeignKey<Department>(x => x.InsManager)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.UseEncryption(_encryptionProvider);
 
             base.OnModelCreating(modelBuilder);
         }

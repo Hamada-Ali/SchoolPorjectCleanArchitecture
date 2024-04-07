@@ -132,6 +132,12 @@
   <data name="EmailIsExist" xml:space="preserve">
     <value>The Email Already Exists</value>
   </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>Email is not Confirmed</value>
+  </data>
+  <data name="ErrorWhenConfirmEmail" xml:space="preserve">
+    <value>Error When Confirming Email</value>
+  </data>
   <data name="FailedCreateOperation" xml:space="preserve">
     <value>Create Operation Failed</value>
   </data>
@@ -152,6 +158,9 @@
   </data>
   <data name="FailedToUpdateUserRoles" xml:space="preserve">
     <value>Failed to Update User Roles</value>
+  </data>
+  <data name="InvalidCode" xml:space="preserve">
+    <value>The Code Is Invalid</value>
   </data>
   <data name="IsExist" xml:space="preserve">
     <value>This Record Is Exist</value>

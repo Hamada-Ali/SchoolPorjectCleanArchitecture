@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.IdentityUser.Commands.Models;
 using SchoolProject.Core.Resources;
 using SchoolProject.Domain.Entities.Identity;
+using SchoolProject.Services.Interface;
 
 namespace SchoolProject.Core.Features.IdentityUser.Commands.Handlers
 {
@@ -18,54 +20,41 @@ namespace SchoolProject.Core.Features.IdentityUser.Commands.Handlers
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _user;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IEmailsService _emailsService;
+        private readonly IApplicationUserService _applicationUserService;
 
         public UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer, IMapper mapper,
-                                    UserManager<User> user) : base(stringLocalizer)
+                                    UserManager<User> user, IHttpContextAccessor httpContextAccessor, IEmailsService emailsService,
+                                    IApplicationUserService applicationUserService) : base(stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
             _mapper = mapper;
             _user = user;
+            _httpContextAccessor = httpContextAccessor;
+            _emailsService = emailsService;
+            _applicationUserService = applicationUserService;
         }
         public async Task<ResponseInformation<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
-            // if email exist
-            var user = await _user.FindByEmailAsync(request.Email);
-
-            // the Email already exists
-            if (user != null)
-            {
-                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.EmailIsExist]);
-            }
-
-            // if username is exist
-            var userByUserName = await _user.FindByNameAsync(request.UserName);
-
-
-            // the user already exists
-            if (userByUserName != null)
-            {
-                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.EmailIsExist]);
-            }
-
-            // mapping
+            //// mapping
             var mappedUser = _mapper.Map<User>(request);
 
             // create user
-            var createUser = await _user.CreateAsync(mappedUser, request.Password);
+            var createUser = await _applicationUserService.AddUserAsync(mappedUser, request.Password);
 
-            // failed
-            if (!createUser.Succeeded)
+
+            switch (createUser)
             {
-                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedCreateOperation] + $" => Description: {createUser.Errors.FirstOrDefault().Description}");
+                case "EmailIsExist": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.EmailIsExist]);
+                case "UserNameIsExist": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserNameIsExist]);
+                case "ErrorInCreateUser": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedCreateOperation]);
+                case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.OperationFailed]);
+                case "Success": return Success<string>("");
+                default: return BadRequest<string>(createUser);
             }
-
-
-            await _user.AddToRoleAsync(mappedUser, "user");
-
-
-            // success
-            return Created("User Created Successfully");
         }
+
 
         public async Task<ResponseInformation<string>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {

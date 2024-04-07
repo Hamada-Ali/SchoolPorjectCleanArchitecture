@@ -12,7 +12,10 @@ namespace SchoolProject.Core.Features.Authentication.Command.Handlers
 {
     public class AuthenticationCommandHandler : ResponseHandler,
                                                 IRequestHandler<SignInCommand, ResponseInformation<JwtAuthDto>>,
-                                                IRequestHandler<RefreshTokenCommand, ResponseInformation<JwtAuthDto>>
+                                                IRequestHandler<RefreshTokenCommand, ResponseInformation<JwtAuthDto>>,
+                                                IRequestHandler<ResetPasswordCommand, ResponseInformation<string>>,
+                                                IRequestHandler<ResetPasswordWithConfirmCommand, ResponseInformation<string>>
+
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         private readonly UserManager<User> _userManager;
@@ -41,6 +44,12 @@ namespace SchoolProject.Core.Features.Authentication.Command.Handlers
             }
             // try To login
             var signIn = _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+
+            // confirm Email
+            if (!user.EmailConfirmed)
+            {
+                return BadRequest<JwtAuthDto>(_stringLocalizer[SharedResourcesKeys.EmailNotConfirmed]);
+            }
             // password is wrong
             if (!signIn.IsCompletedSuccessfully)
             {
@@ -83,6 +92,32 @@ namespace SchoolProject.Core.Features.Authentication.Command.Handlers
 
             var result = await _authenticationService.GetRefreshToken(user, jwtToken, expiryDate, request.RefreshToken);
             return Success(result);
+        }
+
+        public async Task<ResponseInformation<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.SendResetPasswordCode(request.Email);
+
+            switch (result)
+            {
+                case "UserNotFound": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserNotExist]);
+                case "ErrorInUpdateUser": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.OperationFailed]);
+                case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.OperationFailed]);
+                case "Success": return Success<string>("");
+                default: return BadRequest<string>(result);
+            }
+        }
+
+        public async Task<ResponseInformation<string>> Handle(ResetPasswordWithConfirmCommand request, CancellationToken cancellationToken)
+        {
+
+            var result = await _authenticationService.ResetPasswordConfirm(request.Email, request.Password);
+            switch (result)
+            {
+                case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.OperationFailed]);
+                case "Success": return Success<string>("");
+                default: return BadRequest<string>(result);
+            }
         }
     }
 }
