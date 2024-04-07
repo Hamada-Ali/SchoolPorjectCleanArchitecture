@@ -132,6 +132,12 @@
   <data name="EmailIsExist" xml:space="preserve">
     <value>البريد الالكترونى موجود بالفعل</value>
   </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>البريد الالكترونى غير موثق</value>
+  </data>
+  <data name="ErrorWhenConfirmEmail" xml:space="preserve">
+    <value>خطا اثناء توثيق البريد الالكترونى</value>
+  </data>
   <data name="FailedCreateOperation" xml:space="preserve">
     <value>فشل التسجيل </value>
   </data>
@@ -152,6 +158,9 @@
   </data>
   <data name="FailedToUpdateUserRoles" xml:space="preserve">
     <value>فشلت عملية التحديث للمستخدم</value>
+  </data>
+  <data name="InvalidCode" xml:space="preserve">
+    <value>الرمز خطا </value>
   </data>
   <data name="IsExist" xml:space="preserve">
     <value>هذا السجل موجود</value>
