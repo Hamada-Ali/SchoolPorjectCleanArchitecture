@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolProject.Core;
+using SchoolProject.Core.Filters;
 using SchoolProject.Core.Middleware;
 using SchoolProject.Domain.Entities.Identity;
 using SchoolProject.Infrustructure;
@@ -96,6 +97,8 @@ namespace SchoolPorject.Api
                 var factory = x.GetRequiredService<IUrlHelperFactory>();
                 return factory.GetUrlHelper(actionContext);
             });
+
+            builder.Services.AddTransient<AuthFilter>();
 
             var app = builder.Build();
 
