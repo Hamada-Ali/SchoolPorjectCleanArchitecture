@@ -13,5 +13,19 @@ namespace SchoolPorject.Api.Controllers
             var response = await Mediator.Send(query); // alternative to { Id = id }
             return NewResult(response);
         }
+
+        [HttpGet(Router.DepartmentRouting.GetDepartmentStudentCountById)]
+        public async Task<IActionResult> GetDepartmentById([FromRoute] int id)
+        {
+            var response = await Mediator.Send(new GetDepartmentStudentCountByIdQuery() { DID = id }); // alternative to { Id = id }
+            return NewResult(response);
+        }
+
+        [HttpGet(Router.DepartmentRouting.GetDepartmentStudentsCount)]
+        public async Task<IActionResult> GetDepartmentStudentsCount()
+        {
+            var response = await Mediator.Send(new GetDepartmentStudentCountQuery()); // alternative to { Id = id }
+            return NewResult(response);
+        }
     }
 }

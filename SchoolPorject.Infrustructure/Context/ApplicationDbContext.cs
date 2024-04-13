@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Domain.Entities;
 using SchoolProject.Domain.Entities.Identity;
+using SchoolProject.Domain.Entities.Views;
 
 namespace SchoolProject.Infrustructure.Domain
 {
@@ -20,7 +21,7 @@ namespace SchoolProject.Infrustructure.Domain
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            // this is the key we can decrypt the column with
+            // this is the key we can decrypt the column with (related to send email code for verfication) 
             _encryptionProvider = new GenerateEncryptionProvider("68d09eda6a294cf7aeb945e56f5c0b8568d09eda6a294cf7aeb945e56f5c0b85");
         }
 
@@ -31,6 +32,12 @@ namespace SchoolProject.Infrustructure.Domain
         public DbSet<Subjects> subjects { get; set; }
         public DbSet<StudentSubject> studentSubjects { get; set; }
         public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
+
+
+        #region Views 
+        public DbSet<ViewDepartment> ViewDepartment { get; set; }
+
+        #endregion
 
         // using fluent api
         protected override void OnModelCreating(ModelBuilder modelBuilder)
