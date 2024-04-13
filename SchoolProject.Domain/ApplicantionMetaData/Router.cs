@@ -24,6 +24,8 @@
         {
             public const string Prefix = Rule + "Department";
             public const string GetById = Prefix + "/Id";
+            public const string GetDepartmentStudentsCount = Prefix + "/GetDepartmentStudentsCount";
+            public const string GetDepartmentStudentCountById = Prefix + "/GetDepartmentStudentCountById/{id}";
 
         }
 
