@@ -129,6 +129,8 @@ namespace SchoolPorject.Api
 
             app.UseCors(cors); // using our variable
 
+            app.UseStaticFiles();
+
             app.UseAuthentication();
 
             app.UseAuthorization();
