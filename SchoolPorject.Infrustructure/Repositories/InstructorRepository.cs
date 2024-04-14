@@ -8,10 +8,15 @@ namespace SchoolProject.Infrustructure.Repositories
 {
     public class InstructorRepository : GenericRepositoryAsync<Instructor>, IInstrctorRespository
     {
-        private DbSet<Instructor> instructors;
+        private DbSet<Instructor> _instructorsRepository;
         public InstructorRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            instructors = dbContext.Set<Instructor>();
+            _instructorsRepository = dbContext.Set<Instructor>();
+        }
+
+        public async Task<List<Instructor>> GetInstructorsAsync()
+        {
+            return await _instructorsRepository.Include(x => x.DID).ToListAsync();
         }
     }
 }

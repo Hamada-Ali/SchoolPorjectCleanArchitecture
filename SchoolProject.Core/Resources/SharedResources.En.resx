@@ -165,6 +165,9 @@
   <data name="IsExist" xml:space="preserve">
     <value>This Record Is Exist</value>
   </data>
+  <data name="NoImage" xml:space="preserve">
+    <value>The Image Not Found</value>
+  </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>Must not be empty</value>
   </data>

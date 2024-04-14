@@ -5,5 +5,6 @@ namespace SchoolProject.Infrustructure.Interface
 {
     public interface IInstrctorRespository : IGenericRepositoryAsync<Instructor>
     {
+        public Task<List<Instructor>> GetInstructorsAsync();
     }
 }

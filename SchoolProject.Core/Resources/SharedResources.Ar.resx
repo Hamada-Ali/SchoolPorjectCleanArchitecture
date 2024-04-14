@@ -165,6 +165,9 @@
   <data name="IsExist" xml:space="preserve">
     <value>هذا السجل موجود</value>
   </data>
+  <data name="NoImage" xml:space="preserve">
+    <value>الصورة غير موجودة</value>
+  </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>لا يمكن ان يكون فارغ</value>
   </data>

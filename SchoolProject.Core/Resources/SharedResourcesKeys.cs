@@ -36,5 +36,6 @@
         public const string EmailNotConfirmed = "EmailNotConfirmed";
         public const string ErrorWhenConfirmEmail = "ErrorWhenConfirmEmail";
         public const string InvalidCode = "InvalidCode";
+        public const string NoImage = "NoImage";
     }
 }
