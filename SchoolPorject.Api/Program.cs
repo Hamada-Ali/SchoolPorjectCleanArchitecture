@@ -13,6 +13,7 @@ using SchoolProject.Infrustructure;
 using SchoolProject.Infrustructure.Domain;
 using SchoolProject.Infrustructure.Seeding;
 using SchoolProject.Services;
+using Serilog;
 using System.Globalization;
 
 namespace SchoolPorject.Api
@@ -99,6 +100,12 @@ namespace SchoolPorject.Api
             });
 
             builder.Services.AddTransient<AuthFilter>();
+
+            //serilog(logger)
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(builder.Configuration).CreateLogger();
+            builder.Services.AddSerilog();
+
 
             var app = builder.Build();
 

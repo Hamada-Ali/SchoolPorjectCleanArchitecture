@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Core.Bases;
+using Serilog;
 using System.Net;
 using System.Text.Json;
 
@@ -29,6 +30,7 @@ namespace SchoolProject.Core.Middleware
                 var response = context.Response;
                 response.ContentType = "application/json";
                 var responseModel = new ResponseInformation<string>() { Succeeded = false, Message = error?.Message };
+                Log.Error(error, error.Message, context.Request, "");
                 //TODO:: cover all validation errors
                 switch (error)
                 {

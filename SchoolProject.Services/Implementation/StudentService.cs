@@ -3,6 +3,7 @@ using SchoolProject.Domain.Entities;
 using SchoolProject.Domain.Helpers;
 using SchoolProject.Infrustructure.Interface;
 using SchoolProject.Services.Interface;
+using Serilog;
 
 namespace SchoolProject.Services.Implementation
 {
@@ -41,6 +42,7 @@ namespace SchoolProject.Services.Implementation
             catch (Exception ex)
             {
                 await trans.RollbackAsync();
+                Log.Error(ex.Message);
                 return "failed";
             }
         }
