@@ -9,6 +9,7 @@ using SchoolProject.Core.Wrappers;
 using SchoolProject.Domain.Entities;
 using SchoolProject.Domain.Entities.Procedures;
 using SchoolProject.Services.Interface;
+using Serilog;
 using System.Linq.Expressions;
 
 namespace SchoolProject.Core.Features.Department.Queries.Handlers
@@ -54,6 +55,8 @@ namespace SchoolProject.Core.Features.Department.Queries.Handlers
             var paginatedList = await studnetQuerable.Select(expression).ToPaginatedListAsync(request.StudentPageNubmer, request.StudnetPageSize);
 
             mapped_dept.StudentList = paginatedList;
+
+            Log.Information($"Get Department By Id {request.Id}!");
 
             return Success(mapped_dept);
         }

@@ -1,25 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using SchoolProject.Infrustructure.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolProject.Infrustructure.InfrastructureBases
 {
     public class GenericRepositoryAsync<T> : IGenericRepositoryAsync<T> where T : class
-    { 
+    {
 
         protected readonly ApplicationDbContext _dbContext;
-        
+
         public GenericRepositoryAsync(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-    
+
         public virtual async Task<T> GetByIdAsync(int id)
         {
 
@@ -105,6 +100,20 @@ namespace SchoolProject.Infrustructure.InfrastructureBases
             _dbContext.Set<T>().UpdateRange(entities);
             await _dbContext.SaveChangesAsync();
         }
-      
+
+        public async Task<IDbContextTransaction> BeginTransactionAsync()
+        {
+            return await _dbContext.Database.BeginTransactionAsync();
+        }
+
+        public async Task CommitAsync()
+        {
+            await _dbContext.Database.CommitTransactionAsync();
+        }
+
+        public async Task RollBackAsync()
+        {
+            await _dbContext.Database.RollbackTransactionAsync();
+        }
     }
 }

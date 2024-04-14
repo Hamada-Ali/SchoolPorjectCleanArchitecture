@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolPorject.Api.Base;
 using SchoolProject.Core.Features.IdentityUser.Commands.Models;
 using SchoolProject.Core.Features.IdentityUser.Queries.Models;
@@ -6,7 +7,7 @@ using SchoolProject.Domain.ApplicantionMetaData;
 
 namespace SchoolPorject.Api.Controllers
 {
-    [ApiController]
+    [Authorize(Roles = "admin")]
     public class IdentityUserController : AppControllerBase
     {
         [HttpPost(Router.IdentityUser.Create)]
