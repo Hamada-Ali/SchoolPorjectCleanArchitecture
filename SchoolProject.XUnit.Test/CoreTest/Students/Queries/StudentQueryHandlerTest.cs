@@ -11,8 +11,10 @@ using SchoolProject.Core.Resources;
 using SchoolProject.Domain.Entities;
 using SchoolProject.Domain.Helpers;
 using SchoolProject.Services.Interface;
+using SchoolProject.XUnit.Test.TestModels;
 using System.Net;
 
+[assembly: CollectionBehavior(CollectionBehavior.CollectionPerClass, MaxParallelThreads = 20)]
 namespace SchoolProject.XUnit.Test.CoreTest.Students.Queries
 {
     public class StudentQueryHandlerTest
@@ -57,8 +59,10 @@ namespace SchoolProject.XUnit.Test.CoreTest.Students.Queries
         }
 
         [Theory]
-        [InlineData(66)]
+        //[InlineData(66)]
         //[InlineData(2)]
+        //[ClassData(typeof(PassDataUsingClassData))]
+        [MemberData(nameof(PassDataToParamUsingMemberData.GetParamData), MemberType = typeof(PassDataToParamUsingMemberData))]
         public async Task Handle_StudentById_when_student_Notfound_return_404(int id)
         {
             #region Arrage

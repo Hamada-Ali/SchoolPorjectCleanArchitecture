@@ -25,12 +25,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CoreTest\Students\Commands\" />
     <Folder Include="ServiceTest\ExtentionMethod\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SchoolProject.Core\SchoolProject.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
