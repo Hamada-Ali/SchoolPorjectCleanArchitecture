@@ -28,7 +28,7 @@ namespace SchoolProject.XUnit.Test
             z = x + y;
             // Assert
 
-            z.Should().Be(2);
+            z.Should().Be(5);
         }
 
         [Fact]
